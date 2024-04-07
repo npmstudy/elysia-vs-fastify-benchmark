@@ -191,11 +191,17 @@ Requests/sec: 158275.91
 Transfer/sec:     26.72MB
 ```
 
-Conclusions
 
-- Fastify：4763980 requests
+Benchmark done on the same computer, almost at the same time (within 10 minutes)。
+
+- Elysia is build（from ts to singlefile）, no cluster and log
+- Fastify use ESM（no need any build）    , no cluster and log
+
+Fastify is faster than Elysia.
+
+- Fastify（v4.26.2）：4763980 requests
   - Requests/sec: 158275.91
   - Transfer/sec:     26.72MB
-- Elysia:  4088491 requests
+- Elysia（v1.0.13）:  4088491 requests
   - Requests/sec: 135982.83
   - Transfer/sec:     16.60MB
