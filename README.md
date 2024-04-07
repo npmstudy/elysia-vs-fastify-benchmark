@@ -195,7 +195,7 @@ Transfer/sec:     26.72MB
 Benchmark done on the same computer, almost at the same time (within 10 minutes)。
 
 - Elysia is build（from ts to singlefile）, no cluster and log
-- Fastify use ESM（no need any build）    , no cluster and log
+- Fastify use ESM（no need any build）    , use cluster ,no log
 
 Fastify is faster than Elysia.
 
