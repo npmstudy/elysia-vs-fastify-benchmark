@@ -191,8 +191,14 @@ Requests/sec: 158275.91
 Transfer/sec:     26.72MB
 ```
 
+Benchmark done on the same computer(Apple M2 Pro + 32 GB + macOS 13.6), almost at the same time (within 10 minutes)。
 
-Benchmark done on the same computer, almost at the same time (within 10 minutes)。
+```
+$ node -v
+v20.11.1
+$ bun -v
+1.1.2
+```
 
 - Elysia is build（from ts to singlefile）, no cluster and log
 - Fastify use ESM（no need any build）    , use cluster ,no log
@@ -205,3 +211,12 @@ Fastify is faster than Elysia.
 - Elysia（v1.0.13）:  4088491 requests
   - Requests/sec: 135982.83
   - Transfer/sec:     16.60MB
+
+
+Fastify optimizations.
+
+- first time: fastify use log
+- second time: fastify not use log
+- third time：use cluster
+
+I am not familiar with bun and could not find any information about cluster. I am not sure if this will have any impact on the benchmark. If anyone knows, please advise
