@@ -29,7 +29,7 @@ $ ./mycli
 
 benchmark
 
-```
+```sh
 $ wrk -t12 -c400 -d30s http://127.0.0.1:3000
 Running 30s test @ http://127.0.0.1:3000
   12 threads and 400 connections
@@ -41,6 +41,24 @@ Running 30s test @ http://127.0.0.1:3000
   Socket errors: connect 155, read 110, write 0, timeout 0
 Requests/sec: 135982.83
 Transfer/sec:     16.60MB
+```
+
+thanks to SaltyAom, and i use [app/spawn.ts](./app/spawn.ts)
+run Elysia with cluster mode.
+
+benchmark
+
+```sh
+$ wrk -t12 -c400 -d30s http://127.0.0.1:3000
+Running 30s test @ http://127.0.0.1:3000
+  12 threads and 400 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     1.57ms    0.88ms  39.05ms   99.08%
+    Req/Sec    12.99k     3.31k   24.37k    65.11%
+  4654876 requests in 30.03s, 568.22MB read
+  Socket errors: connect 155, read 122, write 0, timeout 0
+Requests/sec: 155000.93
+Transfer/sec:     18.92MB
 ```
 
 ## fastify
@@ -91,13 +109,13 @@ Transfer/sec:      9.22MB
 
 second time, log = false
 
-```
+```js
 const fastify = Fastify({
   logger: false,
 });
 ```
 
-```
+```sh
 $ wrk -t12 -c400 -d30s http://127.0.0.1:3000
 Running 30s test @ http://127.0.0.1:3000
   12 threads and 400 connections
@@ -140,12 +158,11 @@ if (cluster.isPrimary) {
   fastify.listen({ port: 3000 });
 }
 
-
 ```
 
 benchmark
 
-```
+```sh
 wrk -t12 -c400 -d30s http://127.0.0.1:3000
 Running 30s test @ http://127.0.0.1:3000
   12 threads and 400 connections
@@ -162,7 +179,7 @@ Transfer/sec:     26.72MB
 
 Elysia
 
-```
+```sh
 $ wrk -t12 -c400 -d30s http://127.0.0.1:3000
 Running 30s test @ http://127.0.0.1:3000
   12 threads and 400 connections
@@ -178,7 +195,7 @@ Transfer/sec:     16.60MB
 
 Fastify
 
-```
+```sh
 wrk -t12 -c400 -d30s http://127.0.0.1:3000
 Running 30s test @ http://127.0.0.1:3000
   12 threads and 400 connections
@@ -193,7 +210,7 @@ Transfer/sec:     26.72MB
 
 Benchmark done on the same computer(Apple M2 Pro + 32 GB + macOS 13.6), almost at the same time (within 10 minutes)。
 
-```
+```sh
 $ node -v
 v20.11.1
 $ bun -v
@@ -205,13 +222,15 @@ $ bun -v
 
 Fastify is faster than Elysia.
 
-- Fastify（v4.26.2）：4763980 requests
+- Fastify（v4.26.2 cluster））：4763980 requests
   - Requests/sec: 158275.91
   - Transfer/sec:     26.72MB
-- Elysia（v1.0.13）:  4088491 requests
+- Elysia（v1.0.13 cluster）:  4654876 requests
+  - Requests/sec: 155000.93
+  - Transfer/sec:     18.92MB
+- Elysia（v1.0.13 single thread）:  4088491 requests
   - Requests/sec: 135982.83
   - Transfer/sec:     16.60MB
-
 
 Fastify optimizations.
 
@@ -220,3 +239,4 @@ Fastify optimizations.
 - third time：use cluster
 
 I am not familiar with bun and could not find any information about cluster. I am not sure if this will have any impact on the benchmark. If anyone knows, please advise
+
