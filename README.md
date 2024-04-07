@@ -1,5 +1,7 @@
 # benchmark elysia vs fastify
 
+![](./e.png)
+
 ## bun
 
 app/src/index.ts
