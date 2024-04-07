@@ -1,0 +1,16 @@
+{
+  "name": "benchmark",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "``` $ bun build src/index.ts --compile --outfile mycli   [29ms]  bundle  240 modules  [184ms] compile  mycli $ ./mycli 🦊 Elysia is running at localhost:3000 ```",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fastify": "^4.26.2"
+  }
+}
